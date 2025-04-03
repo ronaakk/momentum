@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
+import nav from "@components/Nav"
 import "./globals.css";
 
 // Load the font I want to use
