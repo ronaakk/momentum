@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/landing/Nav";
+import Footer from "@/components/landing/Footer";
 
 // Load the font I want to use
 const openSans = Open_Sans({
@@ -19,8 +20,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${openSans.variable} antialiased`}>
       <body>
-        <Nav />
-        {children}
+        {/* nav should be wider */}
+        <div className="mx-auto max-w-7xl px-4 py-4 md:px-0">
+          <Nav />
+        </div>
+
+        <div className="mx-auto max-w-6xl px-4 md:px-0"> 
+          {children}
+          {/* <Footer /> */}
+        </div>
       </body>
     </html>
   );

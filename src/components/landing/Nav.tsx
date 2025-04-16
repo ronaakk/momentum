@@ -12,8 +12,7 @@ function Nav() {
 
 
   return (
-    <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
-
+    <nav className="flex w-full items-center justify-between sm:px-8">
       <div className="flex justify-between items-center gap-14">
         <Link href="/" className="flex items-center gap-3 py-3">
           <Image 
@@ -22,7 +21,7 @@ function Nav() {
             width={40}
             height={40}
           />
-          <span className="hidden text-slate-950 text-foreground tracking-tight sm:block">
+          <span className="hidden text-slate-950 tracking-wide font-medium sm:block">
             Momentum
           </span>
         </Link>
@@ -41,7 +40,6 @@ function Nav() {
         </div>
       </div>
       
-
       <Button variant={"outline"} className="sign-in">
         <Link href='#'>
           Sign in

@@ -5,7 +5,7 @@
 @layer base {
   /* Light theme (default) */
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 98%;
     --foreground: 23 23 23;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -62,7 +62,7 @@
 
   /* Base body styles */
   body {
-    @apply font-inter px-4 md:px-0;
+    @apply font-inter;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 }
@@ -79,6 +79,11 @@
     @apply bg-background-light dark:bg-gray-dark
            border border-gray-light dark:border-gray-dark
   }
+
+  .header {
+    @apply text-3xl font-medium bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent;
+  }
+  
 }
 
 @layer base {
