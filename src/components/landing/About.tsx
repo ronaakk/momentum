@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function About() {
   return (
-    <div className="flex flex-col justify-center items-center py-8 md:py-10 space-y-6 sm:px-10 md:px-12 border-t border-pglightgrey">
+    <div className="animate-slide-in flex flex-col justify-center items-center py-8 md:py-10 space-y-6 sm:px-10 md:px-12 border-t border-pglightgrey">
       <h1 className="header tracking-tight h-[3rem] sm:h-[4rem] leading-normal md:text-5xl lg:text-6xl text-center">
         Tiny actions, lasting change.
       </h1>

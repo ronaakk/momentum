@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 function Hero() {
   return (
-    <section className="px-6 md:px-2">
+    <section className="animate-slide-in px-6 md:px-2">
         <div data-aos="fade-up"
             className="relative mx-auto sm:px-5 px-4 max-w-screen-xl py-4 flex items-center aos-init aos-animate">
             <Image 

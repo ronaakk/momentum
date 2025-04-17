@@ -2,8 +2,8 @@ import React from 'react'
 
 function Features() {
   return (
-    <div id='features' className='flex flex-col justify-center items-center py-8 md:py-12 space-y-6 sm:px-10 md:px-12'>
-      <div className='header sm:text-4xl'>
+    <div id='features' className='animate-slide-in flex flex-col justify-center items-center py-8 md:py-12 space-y-6 sm:px-10 md:px-12'>
+      <div className='header font-medium sm:text-4xl'>
         What is Momentum? 
       </div>
       <p className='max-w-3xl text-center pb-4 sm:pb-8 text-lg'>
