@@ -74,10 +74,8 @@
     text-sm transition-colors border-gray-300 text-gray-700 hover:border-gray-400 active:bg-gray-100 active:text-gray-700/80
   }
 
-  /* Card component example */
-  .card {
-    @apply bg-background-light dark:bg-gray-dark
-           border border-gray-light dark:border-gray-dark
+  .feature-card {
+    @apply list-none rounded-2xl border border-gray-200 p-8 shadow-sm hover:shadow-md transition-shadow bg-white text-base
   }
 
   .header {
