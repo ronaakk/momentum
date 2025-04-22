@@ -5,7 +5,7 @@ import FAQ from "@/components/landing/FAQ";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <About />
       <Hero />
       <Features />
