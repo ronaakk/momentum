@@ -9,8 +9,8 @@ import {
 
 function FAQ() {
   return (
-    <div className='mx-auto max-w-3xl flex flex-col justify-center text-center animate-slide-in'>
-        <p className='header text-3xl font-medium md:text-4xl mt-5 mb-4'>
+    <div id="faqs" className='mx-auto max-w-6xl flex flex-col justify-center items-center text-center animate-slide-in mt-5 mb-4 px-10'>
+        <p className='header text-3xl font-medium md:text-4xl mb-5'>
           Questions & Answers
         </p>
         
@@ -27,6 +27,7 @@ function FAQ() {
             <AccordionContent className='text-left text-base'>
               Yes! The purpose of this platform is to help you build better habits without putting you through paywalls.
             </AccordionContent>
+          </AccordionItem>
 
             <AccordionItem value="item-3">
             <AccordionTrigger className='text-lg font-bold'>Do I need to use it every day?</AccordionTrigger>
@@ -40,7 +41,6 @@ function FAQ() {
             <AccordionContent className='text-left text-base'>
             Absolutely. Whether you're trying to stretch every morning, drink more water, or write daily - you can create and track any habit that fits your goals.
             </AccordionContent>
-          </AccordionItem>
           </AccordionItem>
         </Accordion>
     </div>

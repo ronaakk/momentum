@@ -9,6 +9,7 @@ export default {
   theme: {
   	extend: {
   		colors: {
+			spotifyGreen: '#1DB954',
   			primary: {
   				light: '#1db954',
   				dark: '#1aa34a',
