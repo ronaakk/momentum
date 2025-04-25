@@ -20,18 +20,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${openSans.variable} antialiased`}>
       <body>
-        {/* nav should be wider */}
+        {/* nav should be wider
         <div className="mx-auto max-w-7xl px-4 py-4 md:px-0">
           <Nav />
-        </div>
+        </div> */}
 
-        <div className="mx-auto max-w-6xl px-4 md:px-0"> 
+        <div> 
           {children}
         </div>
 
-        <div className="mx-auto max-w-7xl px-4 py-4 md:px-0">
+        {/* <div className="mx-auto max-w-7xl px-4 py-4 md:px-0">
           <Footer />
-        </div>
+        </div> */}
       </body>
     </html>
   );

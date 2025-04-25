@@ -6,7 +6,7 @@ function Features() {
       <div className='header font-medium sm:text-4xl'>
         What is Momentum? 
       </div>
-      <p className='max-w-3xl text-center pb-4 sm:pb-8 text-lg'>
+      <p className='max-w-3xl text-center pb-4 sm:pb-8 text-lg italic leading md:text-lg lg:text-xl'>
         A habit-building platform designed to help you stay consistent, track your progress, and create lasting change — one small action at a time.
       </p>
 

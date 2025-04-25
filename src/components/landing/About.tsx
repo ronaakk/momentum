@@ -12,7 +12,7 @@ function About() {
         Consistent, small efforts can lead to powerful transformations over time. It's not about doing everything at once — it's about showing up, day by day, and letting the momentum build. 🚀
       </p>
       <Button variant={"default"} className="px-6 text-base mt-8 bg-spotifyGreen hover:bg-green-600">
-        <Link href="/sign-in">
+        <Link href="/log-in">
           Get Started
         </Link>
       </Button>
