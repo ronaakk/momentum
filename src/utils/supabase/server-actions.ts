@@ -25,24 +25,6 @@ export async function loginWithEmail(formData: FormData) {
   redirect('/')
 }
 
-export async function handleGoogleLogin() {
-    const supabase = await createClient()
-    
-    const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`, // TODO: make sure this is set in supabase
-        },
-    })
-    
-    if (error) {
-        redirect('/error')
-    }
-    
-    revalidatePath('/', 'layout')
-    redirect('/')
-}
-
 export async function signup(formData: FormData) {
   const supabase = await createClient()
 
@@ -60,5 +42,5 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/')
+  redirect('/onboarding') // TODO: Will need some sort of onboarding flow '/onboarding'
 }

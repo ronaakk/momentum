@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoginForm } from '@/app/(auth)/login/login-form'
+import { LoginForm } from '@/app/(auth)/login/LoginForm'
 import { Metadata } from 'next';
 import Image from 'next/image';
 

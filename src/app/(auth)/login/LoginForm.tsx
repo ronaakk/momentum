@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -9,7 +8,9 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { handleGoogleLogin, loginWithEmail } from "../../../utils/supabase/actions"
+import { cn } from "@/lib/utils"
+import { loginWithEmail } from "../../../utils/supabase/server-actions"
+import { handleGoogleLogin } from "@/utils/supabase/client-actions"
 
 export function LoginForm({
   className,
@@ -56,6 +57,7 @@ export function LoginForm({
                         />
                       </div>
                       <div className="grid gap-2">
+                        <Label htmlFor="password">Password</Label>
                         <Input id="password" type="password" placeholder="Password" required />
                       </div>
                       <Button type="submit" className="w-full">
