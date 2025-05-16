@@ -68,7 +68,6 @@
 }
 
 @layer components {
-  /* TODO: Primary button needs adjustment for green */
   .log-in {
     @apply inline-flex justify-center rounded-lg border py-[calc(--spacing(2)-1px)] px-[calc(--spacing(3)-1px)] 
     text-sm transition-colors border-gray-300 text-gray-700 hover:border-gray-400 active:bg-gray-100 active:text-gray-700/80
