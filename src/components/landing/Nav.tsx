@@ -41,7 +41,7 @@ function Nav() {
       </div>
       
       <Button variant={"outline"} className="sign-in">
-        <Link href='/log-in'>
+        <Link href='/login'>
           Log in
         </Link>
       </Button>

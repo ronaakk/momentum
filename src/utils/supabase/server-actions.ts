@@ -21,8 +21,8 @@ export async function loginWithEmail(formData: FormData) : Promise<{ error?: str
       // user does not exist
       return { error: 'User does not exist, please sign up.' }
     } else {
-      // password is incorrect
-      return { error: 'Password is incorrect, please try again.' }
+      // they're already signed up with google
+      return { error: "Looks like you've signed up with Google. Please use 'Continue with Google' to log in." }
     }
   }
 
@@ -44,6 +44,10 @@ export async function signup(formData: FormData) : Promise<{ error?: string; suc
 
   const { data, error : signUpError } = await supabase.auth.signUp(formInputs)
 
+  if (signUpError) {
+    return { error: signUpError.code}
+  }
+
   // get the auth.id from data
   if (data?.user) {
     const { id } = data.user
@@ -59,21 +63,6 @@ export async function signup(formData: FormData) : Promise<{ error?: string; suc
     if (insertError) {
       return { error: insertError.message }
     }
-  }
-
-  if (signUpError) {
-      console.log('There was an error signing up this user:', signUpError)
-
-      // check if user already exists by querying the email given
-      const { data : existingUser, error : selectError } = await supabase.from('users').select('email').eq('email', formInputs.email).single()
-
-      if (selectError) {
-        return { error: selectError.message }
-      }
-
-      if (existingUser) {
-        return { error: 'An account with this email already exists.' }
-      }
   }
 
   return { success: true }

@@ -28,25 +28,51 @@ export function SignUpForm({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // get form data and pass it to signupfunction
+    // get form data and pass it to signup function
     const formData = new FormData(e.currentTarget)
 
-    const res = await signup(formData)
+    try {
+      const res = await signup(formData)
+      
+      // Check for specific error codes and show different toasts
+      if (res.error) {
+        if (res.error === "weak_password") {
+          toast({
+            title: "Weak password.",
+            description: "Password must be at least 6 characters.",
+          })
+        } else if (res.error === "user_already_exists") {
+          toast({
+            title: "Email already registered.",
+            description: "Please use a different email or login.",
+            action:
+              <Link href='/login'>
+                <Button variant="outline">Login</Button>
+              </Link>
+          })
+        } else {
+          toast({
+            title: "Registration failed.",
+            description: res.error || "Please try a different email or login.",
+            action:
+              <Link href='/login'>
+                <Button variant="outline">Login</Button>
+              </Link>
+          })
+        }
+        // prevent function from redirecting to dashboard
+        return
+      }
 
-    // if there was an error on signup, it means their email already exists in our db as a user
-    if (res.error) {
+      // TODO: Will need some sort of how to use page -> '/how-to-use'
+      router.push('/dashboard') 
+
+    } catch (error) {
       toast({
-        title: res.error,
-        description: "Please try a different email or login.",
-        action:
-          <Link href='/login'>
-            <ToastAction altText="login">Login</ToastAction>
-          </Link>   
+        title: "Something went wrong.",
+        description: "Please try again later."
       })
     }
-
-    // TODO: Will need some sort of how to use page -> '/how-to-use'
-    router.push('/dashboard') 
   }
 
   return (
@@ -83,6 +109,7 @@ export function SignUpForm({
                   <div className="grid gap-2">
                       <Label htmlFor="name">Name</Label>
                       <Input
+                        name="name"
                         id="name"
                         placeholder="John Doe"
                         required
@@ -92,6 +119,7 @@ export function SignUpForm({
                     <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
                       placeholder="m@example.com"
                       required
@@ -99,7 +127,7 @@ export function SignUpForm({
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="password">Password</Label>
-                    <Input id="password" type="password" placeholder="Password" required />
+                    <Input id="password" name="password" type="password" placeholder="Password" required />
                   </div>
                   <Button type="submit" className="w-full">
                     Continue

@@ -77,6 +77,7 @@ export function LoginForm({
                         <Label htmlFor="email">Email</Label>
                         <Input
                           id="email"
+                          name="email"
                           type="email"
                           placeholder="m@example.com"
                           required
@@ -85,7 +86,7 @@ export function LoginForm({
                       <div className="grid gap-2">
                         {/* TOOD: Need a password update request handler */}
                         <Label htmlFor="password">Password</Label>
-                        <Input id="password" type="password" placeholder="Password" required />
+                        <Input id="password" name="password" type="password" placeholder="Password" required />
                       </div>
                       <Button type="submit" className="w-full">
                         Continue
