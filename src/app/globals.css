@@ -30,6 +30,14 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   /* Dark theme (activated via class="dark") */
@@ -58,12 +66,46 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dashboard-theme {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.1 76.2% 36.3%;
   }
 
   /* Base body styles */
   body {
     @apply font-inter;
+    @apply bg-background text-foreground;
     transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  * {
+    @apply border-border;
   }
 }
 
@@ -80,14 +122,36 @@
   .header {
     @apply text-3xl font-medium bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent;
   }
-  
 }
 
-@layer base {
-  * {
-    @apply border-border;
+/* the dashboard on mobile devices */
+@media (max-width: 640px) {
+  .dashboard-theme .recharts-wrapper {
+    font-size: 12px;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .dashboard-theme .recharts-cartesian-axis-tick-value {
+    font-size: 10px;
   }
+
+  .dashboard-theme button,
+  .dashboard-theme [role="button"],
+  .dashboard-theme .recharts-surface,
+  .dashboard-theme input[type="checkbox"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Exceptions */
+  .dashboard-theme .sidebar-button,
+  .dashboard-theme .habit-day-checkbox {
+    min-height: unset;
+    min-width: unset;
+  }
+}
+
+/* fixing the overflow issues */
+.dashboard-theme .recharts-responsive-container {
+  width: 100% !important;
+  height: 100% !important;
 }

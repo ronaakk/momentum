@@ -2,6 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { sanitizeName } from '@/lib/helpers';
+import supabaseAdmin from './supabase-admin';
 
 export async function loginWithEmail(formData: FormData) : Promise<{ error?: string; success?: boolean; }> {
   const supabase = await createClient()
@@ -14,8 +15,9 @@ export async function loginWithEmail(formData: FormData) : Promise<{ error?: str
   const { error } = await supabase.auth.signInWithPassword(formInputs)
 
   if (error) {
-    // check if the user exists in our db with the given email
-    const { data: user } = await supabase.from('users').select('*').eq('email', formInputs.email).single()
+    // check if the user exists in our db with the given email using the supabase admin
+    const { data: user } = await supabaseAdmin.from('users').select('*').eq('email', formInputs.email).single()
+    console.log(user)
 
     if (!user) {
       // user does not exist
