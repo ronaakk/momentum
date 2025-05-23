@@ -1,10 +1,10 @@
-import type React from "react"
 import "@/app/globals.css"
-import { ThemeProvider } from "@/components/dashboard/theme-provider"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import DashboardNav from "@/components/dashboard/DashboardNav"
+import DashboardNav from "@/components/dashboard/nav/DashboardNav"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import type React from "react"
+import DashBoardThemeProvider from "@/components/dashboard/DashboardThemeProvider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -19,15 +19,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`dashboard-theme ${inter.className}`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
-          <SidebarProvider>
-            <DashboardNav variant="inset"/>
-              {children}  
-          </SidebarProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <DashBoardThemeProvider>
+      <SidebarProvider>
+        <DashboardNav variant="inset"/>
+        {children}  
+      </SidebarProvider>
+    </DashBoardThemeProvider> 
   )
 }

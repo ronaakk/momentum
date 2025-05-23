@@ -67,14 +67,9 @@ export default function DashboardNav({...props} : React.ComponentProps<typeof Si
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
-              <a href="#">
-                <Image src='/assets/images/momentum-logo.svg' alt='momentum logo' width={30} height={30} className='filter brightness-0 invert-[0.5] sepia-[0.3] saturate-[35] hue-rotate-[80deg]'/>
-                <span className="text-base font-semibold">Momentum</span>
-              </a>
+            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:!p-1.5">
+              <Image src='/assets/images/momentum-logo.svg' alt='momentum logo' width={30} height={30} className='filter brightness-0 invert-[0.5] sepia-[0.3] saturate-[35] hue-rotate-[80deg]'/>
+              <span className="text-base font-semibold">Momentum</span> 
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

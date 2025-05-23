@@ -1,7 +1,5 @@
-import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
-import { Separator } from '@radix-ui/react-separator'
-import { SiteHeader } from '@/components/dashboard/SiteHeader'
-import React from 'react'
+import { SiteHeader } from '@/components/dashboard/nav/SiteHeader'
+import { SidebarInset } from '@/components/ui/sidebar'
 
 export default function Dashboard() {
   return (
