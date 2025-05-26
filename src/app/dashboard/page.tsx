@@ -1,4 +1,4 @@
-import { SiteHeader } from '@/components/dashboard/nav/SiteHeader'
+import { SiteHeader } from '@/components/dashboard/content/SiteHeader'
 import { SidebarInset } from '@/components/ui/sidebar'
 
 export default function Dashboard() {
