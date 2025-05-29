@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/landing/Nav";
-import Footer from "@/components/landing/Footer";
 import { Toaster } from "@/components/ui/toaster";
 
 // Load the font I want to use
@@ -19,21 +17,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${openSans.variable} antialiased`}>
+    <html lang="en" className={`${openSans.variable} antialiased`} suppressHydrationWarning>
       <body>
-        {/* nav should be wider
-        <div className="mx-auto max-w-7xl px-4 py-4 md:px-0">
-          <Nav />
-        </div> */}
-
-        <div> 
           {children}
           <Toaster />
-        </div>
-
-        {/* <div className="mx-auto max-w-7xl px-4 py-4 md:px-0">
-          <Footer />
-        </div> */}
       </body>
     </html>
   );

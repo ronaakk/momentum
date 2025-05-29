@@ -59,7 +59,7 @@ export async function signup(formData: FormData) : Promise<{ error?: string; suc
       id,
       name: formInputs.name,
       email: formInputs.email,
-      profile_image: "/assets/images/default-avatar.png"
+      profile_image: "/assets/images/default-avatar.svg"
     })
 
     if (insertError) {

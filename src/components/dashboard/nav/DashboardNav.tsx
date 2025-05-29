@@ -15,9 +15,11 @@ import Image from 'next/image'
 import { NavUser } from './NavUser'
 import { NavMain } from './NavMain'
 import NavSecondary from './NavSecondary'
+import createClient from '@/utils/supabase/client'
+import { useEffect, useState } from 'react'
 
 // Menu items for nav
-const data = {
+const navData = {
   navMain: [
     {
       title: "Dashboard",
@@ -51,17 +53,36 @@ const data = {
       url: '/feedback',
       icon: Send
     }
-
   ],
-  // TODO: need to get user info and populate here, right now I'm using sample data
-  user: {
-    name: 'Ronak',
-    email: 'ronaakk6@gmail.com',
-    image: '/assets/images/default-avatar.svg'
-  }
 }
 
 export default function DashboardNav({...props} : React.ComponentProps<typeof Sidebar>) {
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    image: ''
+  })
+
+  useEffect(() => {
+    // we need to use async here because useEffect runs on the client, after initial render
+    const fetchData = async () => {
+      const supabase = createClient()
+      const { data : { user }, error } = await supabase.auth.getUser()
+      
+      if (error || !user) {
+        console.log('An error occured retrieving user for nav:', error)
+      }
+      
+      const { data } = await supabase.from('users').select('name, email, profile_image').eq('id', user?.id).single()
+      setUserInfo({
+        name: data?.name || 'User',
+        email: data?.email || '',
+        image: data?.profile_image || '/assets/images/default-avatar.svg'
+      })
+    }
+    fetchData()
+  }, [])
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -75,11 +96,11 @@ export default function DashboardNav({...props} : React.ComponentProps<typeof Si
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={navData.navMain} />
+        <NavSecondary items={navData.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userInfo} />
       </SidebarFooter>
     </Sidebar>
   )

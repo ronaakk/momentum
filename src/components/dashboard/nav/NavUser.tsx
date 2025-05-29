@@ -26,6 +26,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useRouter } from "next/navigation"
+import createClient from "@/utils/supabase/client"
 
 export function NavUser({
   user,
@@ -37,6 +39,17 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
+  const supabase = createClient()
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.log('An error occured when signing out:', error)
+    } else {
+      router.push('/')
+    }
+  }
 
   return (
     <SidebarMenu>
@@ -47,7 +60,7 @@ export function NavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg grayscale">
+              <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.image} alt={user.name} />
                 {/* <AvatarFallback className="rounded-lg">{user.name[0], }</AvatarFallback> */}
               </Avatar>
@@ -83,11 +96,11 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <UserCircleIcon />
+                <UserCircleIcon onSelect={() => router.push('/dashboard/account')}/>
                 Account
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleSignOut()}>
               <LogOutIcon />
               Log out
             </DropdownMenuItem>
