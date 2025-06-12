@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
+import { migrateGoogleImage } from '@/utils/supabase/profileStorage'
 
 export async function GET(request: Request) {
   // searchParams -> get url query params, origin -> get the full domain 
@@ -27,7 +28,7 @@ export async function GET(request: Request) {
       }
 
       if (user) {
-        const { data : existingUser } = await supabase.from('users').select('id').eq('id', user.id).single()
+        const { data : existingUser } = await supabase.from('users').select('id, profile_image').eq('id', user.id).single()
 
         // save the user to our users table if they don't exist
         if (!existingUser) {
@@ -35,11 +36,26 @@ export async function GET(request: Request) {
             id: user.id,
             email: user.email,
             name: user.user_metadata.full_name,
-            profile_image: user.user_metadata.picture,
           })
 
           if (insertError) {
             console.log('Error inserting user into db:', insertError)
+          }
+          
+          // upload their profile image to our bucket since they are new
+          const imageUpload = await migrateGoogleImage(user.user_metadata.picture, user.id)
+          if (!imageUpload) {
+            throw new Error('Failed to upload google image to storage bucket')
+          }
+          
+        } else {
+          // Save the google profile picture to our bucket if not there already and matching file structure
+          const needsMigration = !existingUser.profile_image || existingUser.profile_image != `${user.id}/profile.jpg`
+          if (needsMigration) {
+            const imageUpload = await migrateGoogleImage(user.user_metadata.picture, user.id)
+            if (!imageUpload) {
+              throw new Error('Failed to upload google image to storage bucket')
+            }
           }
         }
       }

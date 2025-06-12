@@ -17,6 +17,7 @@ import { NavMain } from './NavMain'
 import NavSecondary from './NavSecondary'
 import createClient from '@/utils/supabase/client'
 import { useEffect, useState } from 'react'
+import { getProfileImageUrl } from '@/utils/supabase/profileStorage'
 
 // Menu items for nav
 const navData = {
@@ -71,15 +72,19 @@ export default function DashboardNav({...props} : React.ComponentProps<typeof Si
       
       if (error || !user) {
         console.log('An error occured retrieving user for nav:', error)
+        return
       }
       
       const { data } = await supabase.from('users').select('name, email, profile_image').eq('id', user?.id).single()
+      // get the signed url for their profile image
+      const profilePicture = await getProfileImageUrl(data?.profile_image)
       setUserInfo({
         name: data?.name || 'User',
         email: data?.email || '',
-        image: data?.profile_image || '/assets/images/default-avatar.svg'
+        image: profilePicture
       })
     }
+
     fetchData()
   }, [])
 
