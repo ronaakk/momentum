@@ -1,4 +1,4 @@
-import { createClient } from './client'
+import createClient from '@/utils/supabase/client'
 
 const DEFAULT_AVATAR_URL = '/assets/images/default-avatar.svg'
 
@@ -97,10 +97,9 @@ export const deleteProfileImage = async (userId) => {
 }
 
 // this will be used in our callback.ts from google auth
-export const migrateGoogleImage = async (googleImageUrl, userId) => {
+// the supabase param being passed here is the admin one
+export const migrateGoogleImage = async (supabase, googleImageUrl, userId) => {
     try {
-        const supabase = createClient()
-
         const response = await fetch(googleImageUrl)
         if (!response.ok) {
             throw new Error('Failed to retrieve google image')
@@ -112,7 +111,7 @@ export const migrateGoogleImage = async (googleImageUrl, userId) => {
 
         // save it to our bucket
         const { error : uploadError } = await supabase.storage
-            .from('profile-images')
+            .from('profile-pictures')
             .upload(fileName, blob, {
                 contentType: blob.type,
                 upsert: true
@@ -126,10 +125,7 @@ export const migrateGoogleImage = async (googleImageUrl, userId) => {
             .eq('id', userId)
         
         if (fieldUpdateError) throw fieldUpdateError
-
-        return True
     } catch (error) {
         console.log('Something went wrong migrating the google image: ', error)
-        return False
     }
 }

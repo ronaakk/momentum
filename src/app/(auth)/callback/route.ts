@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import supabaseAdmin from '@/utils/supabase/supabase-admin'
 import { createClient } from '@/utils/supabase/server'
 import { migrateGoogleImage } from '@/utils/supabase/profileStorage'
 
@@ -43,19 +44,13 @@ export async function GET(request: Request) {
           }
           
           // upload their profile image to our bucket since they are new
-          const imageUpload = await migrateGoogleImage(user.user_metadata.picture, user.id)
-          if (!imageUpload) {
-            throw new Error('Failed to upload google image to storage bucket')
-          }
+          await migrateGoogleImage(supabaseAdmin, user.user_metadata.picture, user.id)
           
         } else {
           // Save the google profile picture to our bucket if not there already and matching file structure
           const needsMigration = !existingUser.profile_image || existingUser.profile_image != `${user.id}/profile.jpg`
           if (needsMigration) {
-            const imageUpload = await migrateGoogleImage(user.user_metadata.picture, user.id)
-            if (!imageUpload) {
-              throw new Error('Failed to upload google image to storage bucket')
-            }
+            await migrateGoogleImage(supabaseAdmin, user.user_metadata.picture, user.id)
           }
         }
       }
