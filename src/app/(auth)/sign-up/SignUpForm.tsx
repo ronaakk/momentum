@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils"
 import { signup } from "@/utils/supabase/server-actions"
 import { handleGoogleLogin } from "@/utils/supabase/client-actions"
 import { useToast } from "@/hooks/use-toast"
-import { ToastAction } from "@radix-ui/react-toast"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -64,7 +63,6 @@ export function SignUpForm({
         return
       }
 
-      // TODO: Will need some sort of how to use page -> '/how-to-use'
       router.push('/dashboard') 
 
     } catch (error) {

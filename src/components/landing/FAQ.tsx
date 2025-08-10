@@ -16,7 +16,7 @@ function FAQ() {
         
         <Accordion className='w-full max-w-3xl mb-5' type="single" collapsible>
           <AccordionItem value="item-1">
-            <AccordionTrigger className='text-lg font-bold'>How is Momentum different from other habit apps?</AccordionTrigger>
+            <AccordionTrigger className='text-lg font-bold'>How is Momentum different from other habit platforms?</AccordionTrigger>
             <AccordionContent className='text-left text-base'>
               Momentum is grounded in real, time-tested behavioral science. The goal is to keep things simple, intentional, and sustainable.
             </AccordionContent>

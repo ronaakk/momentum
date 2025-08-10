@@ -2,7 +2,6 @@ import createClient from '@/utils/supabase/client'
 
 const DEFAULT_AVATAR_URL = '/assets/images/default-avatar.svg'
 
-// TODO: 06/13/2025 - Make sure all these functions work, they should allow access to profile images and upload pictures properly
 // This will create a signed url for access, or just provide the default avatar
 export const getProfileImageUrl = async (currImageUrl) => {
     try {

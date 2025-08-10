@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 
-import { BarChart3, Calendar, Home, Send, BookCheck, Settings } from "lucide-react"
+import { BarChart3, BookOpen, Home, Send, BookCheck, Settings } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -33,9 +33,9 @@ const navData = {
       icon: BarChart3,
     },
     {
-      title: "Calendar",
-      url: "/dashboard/calendar",
-      icon: Calendar,
+      title: "Reflections",
+      url: "/dashboard/reflections",
+      icon: BookOpen,
     },
     {
       title: "My Habits",
